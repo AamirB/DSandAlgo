@@ -13,6 +13,8 @@ public class MyHashMap<K, V> {
 		int hash = key.hashCode() % SIZE;
 		Entry<K, V> e = table[hash];
 
+		Entry<K, V> prev = null;
+
 		if (e != null) {
 
 			while (e != null) {
@@ -21,10 +23,11 @@ public class MyHashMap<K, V> {
 					e.setValue(value);
 					return;
 				}
+				prev = e;
 				e = e.next;
 			}
 			Entry<K, V> newE = new Entry(key, value);
-			e.next = newE;
+			prev.next = newE;
 
 		} else {
 			Entry<K, V> newE = new Entry(key, value);
